@@ -1,10 +1,36 @@
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
 import { MapPin, Briefcase, GraduationCap, Zap } from 'lucide-react'
 import { personalInfo, stats, education } from '../data/portfolio'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
+}
+
+function CountUp({ value }: { value: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-50px' })
+  const [display, setDisplay] = useState('0')
+  const numMatch = value.match(/\d+/)
+  const suffix = value.replace(/\d+/, '')
+  const target = numMatch ? parseInt(numMatch[0]) : 0
+
+  useEffect(() => {
+    if (!inView) return
+    let start = 0
+    const duration = 1200
+    const step = 16
+    const increment = target / (duration / step)
+    const timer = setInterval(() => {
+      start = Math.min(start + increment, target)
+      setDisplay(Math.floor(start).toString())
+      if (start >= target) clearInterval(timer)
+    }, step)
+    return () => clearInterval(timer)
+  }, [inView, target])
+
+  return <span ref={ref}>{inView ? display + suffix : '0' + suffix}</span>
 }
 
 export default function About() {
@@ -72,7 +98,7 @@ export default function About() {
                   whileHover={{ scale: 1.03 }}
                   className="glass-card glow-border p-5 text-center"
                 >
-                  <div className="text-3xl font-black gradient-text mb-1">{stat.value}</div>
+                  <div className="text-3xl font-black gradient-text mb-1"><CountUp value={stat.value} /></div>
                   <div className="text-slate-400 text-sm">{stat.label}</div>
                 </motion.div>
               ))}

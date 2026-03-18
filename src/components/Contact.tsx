@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Linkedin, Github, Send, Zap, CheckCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, Linkedin, Github, Send, Zap, CheckCircle, Copy, Check } from 'lucide-react'
+import confetti from 'canvas-confetti'
 import { personalInfo } from '../data/portfolio'
 
 const fadeUp = {
@@ -8,17 +9,36 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 },
 }
 
+function fireConfetti() {
+  const count = 180
+  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 }
+  confetti({ ...defaults, particleCount: Math.floor(count * 0.25), origin: { x: 0.2, y: 0.6 }, colors: ['#6c63ff', '#38bdf8', '#a855f7'] })
+  confetti({ ...defaults, particleCount: Math.floor(count * 0.25), origin: { x: 0.8, y: 0.6 }, colors: ['#6c63ff', '#38bdf8', '#f59e0b'] })
+  setTimeout(() => confetti({ ...defaults, particleCount: Math.floor(count * 0.5), origin: { x: 0.5, y: 0.5 }, colors: ['#ffffff', '#6c63ff', '#38bdf8'] }), 250)
+}
+
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [sent, setSent] = useState(false)
+  const [copiedEmail, setCopiedEmail] = useState(false)
+  const [copiedPhone, setCopiedPhone] = useState(false)
+
+  const copyToClipboard = (text: string, type: 'email' | 'phone') => {
+    navigator.clipboard.writeText(text)
+    if (type === 'email') { setCopiedEmail(true); setTimeout(() => setCopiedEmail(false), 2000) }
+    else { setCopiedPhone(true); setTimeout(() => setCopiedPhone(false), 2000) }
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`)
     const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`)
-    window.open(`mailto:${personalInfo.email}?subject=${subject}&body=${body}`)
+    // Use location.href for better browser compatibility than window.open
+    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`
+    fireConfetti()
     setSent(true)
-    setTimeout(() => setSent(false), 4000)
+    setForm({ name: '', email: '', message: '' })
+    setTimeout(() => setSent(false), 5000)
   }
 
   return (
@@ -65,26 +85,53 @@ export default function Contact() {
             </div>
 
             {/* Contact details */}
-            <div className="space-y-4">
-              {[
-                { icon: Mail, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
-                { icon: Phone, label: 'Phone', value: personalInfo.phone, href: `tel:+91${personalInfo.phone}` },
-                { icon: MapPin, label: 'Location', value: personalInfo.location, href: '#' },
-              ].map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="flex items-center gap-4 glass-card p-4 glow-border hover:border-primary-400/40 transition-all duration-200 group"
+            <div className="space-y-3">
+              {/* Email - with copy */}
+              <div className="flex items-center gap-4 glass-card p-4 glow-border hover:border-primary-400/40 transition-all duration-200 group">
+                <div className="w-10 h-10 rounded-xl bg-primary-500/15 flex items-center justify-center group-hover:bg-primary-500/25 transition-colors flex-shrink-0">
+                  <Mail size={18} className="text-primary-400" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-slate-500 font-medium">Email</p>
+                  <p className="text-slate-200 font-medium truncate">{personalInfo.email}</p>
+                </div>
+                <button
+                  onClick={() => copyToClipboard(personalInfo.email, 'email')}
+                  className="p-2 rounded-lg text-slate-500 hover:text-primary-400 hover:bg-primary-500/10 transition-all flex-shrink-0"
+                  title="Copy email"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-primary-500/15 flex items-center justify-center group-hover:bg-primary-500/25 transition-colors">
-                    <item.icon size={18} className="text-primary-400" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-slate-500 font-medium">{item.label}</p>
-                    <p className="text-slate-200 font-medium">{item.value}</p>
-                  </div>
-                </a>
-              ))}
+                  {copiedEmail ? <Check size={15} className="text-green-400" /> : <Copy size={15} />}
+                </button>
+              </div>
+
+              {/* Phone - with copy */}
+              <div className="flex items-center gap-4 glass-card p-4 glow-border hover:border-primary-400/40 transition-all duration-200 group">
+                <div className="w-10 h-10 rounded-xl bg-primary-500/15 flex items-center justify-center group-hover:bg-primary-500/25 transition-colors flex-shrink-0">
+                  <Phone size={18} className="text-primary-400" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-slate-500 font-medium">Phone</p>
+                  <p className="text-slate-200 font-medium">{personalInfo.phone}</p>
+                </div>
+                <button
+                  onClick={() => copyToClipboard(personalInfo.phone, 'phone')}
+                  className="p-2 rounded-lg text-slate-500 hover:text-primary-400 hover:bg-primary-500/10 transition-all flex-shrink-0"
+                  title="Copy phone"
+                >
+                  {copiedPhone ? <Check size={15} className="text-green-400" /> : <Copy size={15} />}
+                </button>
+              </div>
+
+              {/* Location */}
+              <div className="flex items-center gap-4 glass-card p-4">
+                <div className="w-10 h-10 rounded-xl bg-primary-500/15 flex items-center justify-center flex-shrink-0">
+                  <MapPin size={18} className="text-primary-400" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 font-medium">Location</p>
+                  <p className="text-slate-200 font-medium">{personalInfo.location}</p>
+                </div>
+              </div>
             </div>
 
             {/* Social */}

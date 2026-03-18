@@ -93,7 +93,14 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setMobileOpen(false)
+                    setTimeout(() => {
+                      const id = link.href.replace('#', '')
+                      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+                    }, 300)
+                  }}
                   className="px-4 py-3 text-sm font-medium text-slate-300 hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200"
                 >
                   {link.label}
