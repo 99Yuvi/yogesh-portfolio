@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Bot, X, Send, Sparkles, User, Loader2, ChevronDown } from 'lucide-react'
+import { Bot, X, Send, Sparkles, User, Loader2 } from 'lucide-react'
 
 const SYSTEM_PROMPT = `You are Yogesh AI — an intelligent assistant representing Yogesh Mahawar's portfolio. You answer questions about Yogesh in a professional, friendly, and concise tone.
 
@@ -109,21 +109,24 @@ export default function AiChat() {
     setInput('')
     setLoading(true)
 
-    const history = [...messages, userMsg].map((m) => ({
+    // Keep last 6 messages only (3 exchanges) to limit token usage
+    const allMessages = [...messages, userMsg]
+    const recentMessages = allMessages.slice(-6)
+    const history = recentMessages.map((m) => ({
       role: m.role,
       content: m.content,
     }))
 
     try {
-      const apiKey = import.meta.env.VITE_OPENAI_API_KEY
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      const apiKey = import.meta.env.VITE_GROQ_API_KEY
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: 'gpt-4o-mini',
+          model: 'llama-3.3-70b-versatile',
           messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...history],
           max_tokens: 300,
           temperature: 0.7,
@@ -194,23 +197,42 @@ export default function AiChat() {
 
   return (
     <>
-      {/* Floating trigger button */}
-      <motion.button
-        onClick={() => setOpen(true)}
+      {/* Floating trigger button + label */}
+      <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 2, type: 'spring', stiffness: 300 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-600 to-accent-500 flex items-center justify-center shadow-2xl shadow-primary-500/40 ${
+        className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 ${
           open ? 'opacity-0 pointer-events-none' : 'opacity-100'
         } transition-opacity duration-200`}
-        aria-label="Open AI Chat"
       >
-        <Bot size={24} className="text-white" />
-        {/* Pulse ring */}
-        <span className="absolute inset-0 rounded-2xl animate-ping bg-primary-500/30" />
-      </motion.button>
+        {/* Label bubble */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 2.6, duration: 0.4 }}
+          className="flex flex-col items-end"
+        >
+          <div className="bg-dark-700 border border-white/10 rounded-2xl rounded-br-sm px-4 py-2.5 shadow-xl shadow-black/30">
+            <p className="text-white text-sm font-semibold leading-tight">Ask anything</p>
+            <p className="text-primary-300 text-xs font-medium">Yogesh AI · Online</p>
+          </div>
+          {/* Small triangle pointer */}
+          <div className="w-3 h-3 bg-dark-700 border-r border-b border-white/10 rotate-45 -mt-1.5 mr-3 shadow-sm" />
+        </motion.div>
+
+        {/* Button */}
+        <motion.button
+          onClick={() => setOpen(true)}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-600 to-accent-500 flex items-center justify-center shadow-2xl shadow-primary-500/40 flex-shrink-0"
+          aria-label="Open AI Chat"
+        >
+          <Bot size={24} className="text-white" />
+          <span className="absolute inset-0 rounded-2xl animate-ping bg-primary-500/30" />
+        </motion.button>
+      </motion.div>
 
       {/* Chat panel */}
       <AnimatePresence>
@@ -238,22 +260,13 @@ export default function AiChat() {
                   </p>
                 </div>
               </div>
-              <div className="flex gap-1">
-                <button
-                  onClick={() => setShowSuggestions((s) => !s)}
-                  className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
-                  title="Toggle suggestions"
-                >
-                  <ChevronDown size={16} className={`transition-transform ${showSuggestions ? 'rotate-180' : ''}`} />
-                </button>
-                <button
-                  onClick={() => setOpen(false)}
-                  className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
-                  aria-label="Close chat"
-                >
-                  <X size={16} />
-                </button>
-              </div>
+              <button
+                onClick={() => setOpen(false)}
+                className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+                aria-label="Close chat"
+              >
+                <X size={16} />
+              </button>
             </div>
 
             {/* Messages */}
@@ -367,7 +380,6 @@ export default function AiChat() {
                   {loading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
                 </motion.button>
               </form>
-              <p className="text-center text-slate-600 text-xs mt-2">Powered by GPT-4o-mini · Ask anything about Yogesh</p>
             </div>
           </motion.div>
         )}
