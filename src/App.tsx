@@ -6,6 +6,7 @@ import Experience from './components/Experience'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import AiChat from './components/AiChat'
 
 export default function App() {
   return (
@@ -26,6 +27,9 @@ export default function App() {
         </main>
         <Footer />
       </div>
+
+      {/* AI Chat Widget */}
+      <AiChat />
     </div>
   )
 }
