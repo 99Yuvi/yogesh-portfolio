@@ -17,7 +17,7 @@ const floatingTechs = [
   { label: 'Node.js', color: '#68A063', x: '75%', y: '70%', delay: 1 },
   { label: 'AI/LLM', color: '#A855F7', x: '5%', y: '75%', delay: 1.5 },
   { label: 'Next.js', color: '#ffffff', x: '88%', y: '45%', delay: 0.8 },
-  { label: 'GenAI', color: '#F59E0B', x: '15%', y: '50%', delay: 0.3 },
+  { label: 'GenAI', color: '#F59E0B', x: '2%', y: '42%', delay: 0.3 },
 ]
 
 export default function Hero() {
@@ -124,7 +124,7 @@ export default function Hero() {
             className="text-slate-400 text-lg lg:text-xl max-w-2xl leading-relaxed mb-10"
           >
             Full-Stack Developer & AI Engineer with{' '}
-            <span className="text-white font-semibold">2+ years</span> of experience. I build
+            <span className="text-white font-semibold">3+ years</span> of experience. I build
             intelligent web applications with{' '}
             <span className="text-primary-300 font-semibold">Laravel, React, Node.js</span> and
             integrate cutting-edge{' '}

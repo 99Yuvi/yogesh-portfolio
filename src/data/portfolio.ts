@@ -6,7 +6,7 @@ export const personalInfo = {
   location: "Jaipur, Rajasthan, India",
   linkedin: "https://linkedin.com/in/yogesh-mahawar-831977272",
   github: "https://github.com/yogeshmahawar",
-  bio: "Full-Stack Developer with 2+ years of experience building intelligent web applications. Currently specializing in AI-powered automation, WhatsApp Business API integrations, and scalable Laravel/React architectures at 99isolutions. Passionate about merging traditional web development with modern AI/LLM capabilities.",
+  bio: "Full-Stack Developer with 3+ years of experience building intelligent web applications. Currently specializing in AI-powered automation, WhatsApp Business API integrations, and scalable Laravel/React architectures at 99isolutions. Passionate about merging traditional web development with modern AI/LLM capabilities.",
   currentRole: "PHP Laravel Developer at 99isolutions",
   availability: "Open to freelance & collaborations",
 };
@@ -158,7 +158,13 @@ export const projects = [
 
 export const education = [
   {
-    degree: "B.C.A. (3rd Year Ongoing)",
+    degree: "Agentic AI Course",
+    institution: "Coursera & Coding Ninja",
+    period: "12/2025 – Present",
+    location: "Online",
+  },
+  {
+    degree: "B.C.A.",
     institution: "University of Technology",
     period: "06/2023 – Present",
     location: "Jaipur, Rajasthan",
@@ -178,7 +184,7 @@ export const education = [
 ];
 
 export const stats = [
-  { label: "Years Experience", value: "2+" },
+  { label: "Years Experience", value: "3+" },
   { label: "Projects Delivered", value: "15+" },
   { label: "AI Integrations", value: "5+" },
   { label: "Happy Clients", value: "10+" },
