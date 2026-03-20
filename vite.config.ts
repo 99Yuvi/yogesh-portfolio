@@ -5,9 +5,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      // Proxy /api/* to the Node.js backend during development
+        // Proxy /api/* to the Node.js backend during development
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'https://portfoliyobackend-fybs.onrender.com',
         changeOrigin: true,
       },
     },
