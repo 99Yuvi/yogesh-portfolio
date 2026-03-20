@@ -119,7 +119,7 @@ export default function AiChat() {
 
     try {
       // API call goes through our Node.js backend proxy — key stays server-side
-      const response = await fetch('/api/chat', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
