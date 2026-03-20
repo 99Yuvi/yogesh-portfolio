@@ -5,9 +5,9 @@ export const personalInfo = {
   phone: "8505072814",
   location: "Jaipur, Rajasthan, India",
   linkedin: "https://linkedin.com/in/yogesh-mahawar-831977272",
-  github: "https://github.com/yogeshmahawar",
+  github: "https://github.com/99Yuvi",
   bio: "Full-Stack Developer with 3+ years of experience building intelligent web applications. Currently specializing in AI-powered automation, WhatsApp Business API integrations, and scalable Laravel/React architectures at 99isolutions. Passionate about merging traditional web development with modern AI/LLM capabilities.",
-  currentRole: "PHP Laravel Developer at 99isolutions",
+  currentRole: "Full-Stack Developer and AI Engineer at 99isolutions",
   availability: "Open to freelance & collaborations",
 };
 
@@ -108,6 +108,7 @@ export const projects = [
     color: "from-green-500 to-emerald-600",
     icon: "Bot",
     highlights: ["NLP-powered responses", "Auto-routing conversations", "24/7 automation"],
+    link: "https://getgabs.com/ai-whatsapp-chatbot/",
   },
   {
     title: "Shopify WhatsApp Integration",
@@ -117,6 +118,7 @@ export const projects = [
     color: "from-violet-500 to-purple-600",
     icon: "ShoppingCart",
     highlights: ["Real-time notifications", "Webhook handling", "Message templates"],
+    link: "https://apps.shopify.com/getgabs-whatsapp-chatbot-api",
   },
   {
     title: "99Pandit Booking Widget",
@@ -126,6 +128,7 @@ export const projects = [
     color: "from-orange-500 to-amber-600",
     icon: "Calendar",
     highlights: ["OTP verification", "Embeddable widget", "Dynamic dropdowns"],
+    link: "https://99pandit.com",
   },
   {
     title: "WordPress Abandoned Cart Plugin",
@@ -163,6 +166,7 @@ export const projects = [
     icon: "CreditCard",
     highlights: ["QR code sharing", "Instant contact save", "Eco-friendly"],
     category: "Mobile / SaaS",
+    link: "https://app.getgabs.com/bizcard/login",
   },
   {
     title: "Automated Reminder Application",
@@ -173,6 +177,7 @@ export const projects = [
     icon: "Bell",
     highlights: ["100% automated delivery", "85% less missed appointments", "Redis queues"],
     category: "Automation",
+    link: "https://getgabs.com/industries/events-and-webinars/",
   },
 ];
 

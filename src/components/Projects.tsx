@@ -61,9 +61,21 @@ export default function Projects() {
                   >
                     <Icon size={22} className="text-white" />
                   </div>
-                  <div className="p-2 rounded-lg text-slate-500 group-hover:text-primary-400 group-hover:bg-primary-500/10 transition-all duration-200">
-                    <ArrowUpRight size={18} />
-                  </div>
+                  {project.link ? (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-lg text-slate-500 hover:text-primary-400 hover:bg-primary-500/10 transition-all duration-200"
+                      title="View Live Project"
+                    >
+                      <ArrowUpRight size={18} />
+                    </a>
+                  ) : (
+                    <div className="p-2 rounded-lg text-slate-500/30">
+                      <ArrowUpRight size={18} />
+                    </div>
+                  )}
                 </div>
 
                 {/* Title & desc */}

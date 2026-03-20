@@ -29,16 +29,27 @@ export default function Contact() {
     else { setCopiedPhone(true); setTimeout(() => setCopiedPhone(false), 2000) }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`)
-    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`)
-    // Use location.href for better browser compatibility than window.open
-    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`
-    fireConfetti()
-    setSent(true)
-    setForm({ name: '', email: '', message: '' })
-    setTimeout(() => setSent(false), 5000)
+    const apiUrl = import.meta.env.VITE_API_URL || ''
+    try {
+      const res = await fetch(`${apiUrl}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        fireConfetti()
+        setSent(true)
+        setForm({ name: '', email: '', message: '' })
+        setTimeout(() => setSent(false), 5000)
+      }
+    } catch {
+      const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`)
+      const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`)
+      window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`
+    }
   }
 
   return (
@@ -235,7 +246,7 @@ export default function Contact() {
               </motion.button>
 
               <p className="text-center text-slate-500 text-xs">
-                Your message will open in your email client.
+                I'll reply within 24 hours.
               </p>
             </form>
           </motion.div>
