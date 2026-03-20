@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react'
+import { ArrowDown, Github, Linkedin, Mail, Sparkles, Download } from 'lucide-react'
 import { personalInfo } from '../data/portfolio'
 
 const roles = [
@@ -146,6 +146,14 @@ export default function Hero() {
             <a href="#contact" className="btn-outline text-base px-8 py-3.5">
               <Mail size={16} />
               Get In Touch
+            </a>
+            <a
+              href="/resume.pdf"
+              download="Yogesh_Mahawar_Resume.pdf"
+              className="inline-flex items-center gap-2 px-8 py-3.5 text-base font-semibold rounded-xl border border-white/20 text-slate-300 hover:border-white/40 hover:text-white hover:bg-white/5 transition-all duration-300 hover:-translate-y-0.5"
+            >
+              <Download size={16} />
+              Download CV
             </a>
           </motion.div>
 

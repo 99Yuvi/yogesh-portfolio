@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Sun, Moon, Download } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Testimonials', href: '#testimonials' },
   { label: 'Contact', href: '#contact' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { theme, toggleTheme } = useTheme()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -57,8 +60,29 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* CTA */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* CTA + Theme toggle */}
+          <div className="hidden md:flex items-center gap-2">
+            {/* Theme toggle */}
+            <motion.button
+              onClick={toggleTheme}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-200"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </motion.button>
+
+            {/* Resume download */}
+            <a
+              href="/resume.pdf"
+              download="Yogesh_Mahawar_Resume.pdf"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium border border-primary-500/40 text-primary-300 rounded-xl hover:bg-primary-500/10 hover:border-primary-400 transition-all duration-200"
+            >
+              <Download size={14} />
+              Resume
+            </a>
+
             <a
               href="https://wa.me/918505072814?text=Hi%20Yogesh!%20I%20visited%20your%20portfolio%20and%20I%27d%20like%20to%20hire%20you."
               target="_blank"
@@ -72,14 +96,23 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Mobile: theme toggle + hamburger */}
+          <div className="md:hidden flex items-center gap-1">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -110,6 +143,15 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="/resume.pdf"
+                download="Yogesh_Mahawar_Resume.pdf"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-primary-300 rounded-lg hover:bg-primary-500/10 transition-all duration-200"
+              >
+                <Download size={14} />
+                Download Resume
+              </a>
               <a
                 href="https://wa.me/918505072814?text=Hi%20Yogesh!%20I%20visited%20your%20portfolio%20and%20I%27d%20like%20to%20hire%20you."
                 target="_blank"

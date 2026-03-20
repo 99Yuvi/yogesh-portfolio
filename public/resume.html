@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yogesh Mahawar – Resume</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, 'Helvetica Neue', sans-serif;
+      font-size: 12px;
+      color: #111827;
+      background: #ffffff;
+      line-height: 1.55;
+    }
+
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 32px 40px;
+    }
+
+    /* ─── PRINT BUTTON (hidden on print) ─── */
+    .print-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(79,70,229,0.35);
+      z-index: 999;
+    }
+    .print-btn:hover { background: #4338ca; }
+
+    /* ─── PRINT INSTRUCTIONS BOX ─── */
+    .print-tip {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      background: #fefce8;
+      border: 1px solid #fbbf24;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 12px;
+      color: #78350f;
+      max-width: 320px;
+      line-height: 1.6;
+      z-index: 999;
+    }
+    .print-tip strong { color: #92400e; }
+
+    /* ─── HEADER — single column, no flex ─── */
+    .name {
+      font-size: 24px;
+      font-weight: 900;
+      color: #111827;
+      letter-spacing: -0.3px;
+      margin-bottom: 2px;
+    }
+
+    .role-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #4f46e5;
+      margin-bottom: 4px;
+    }
+
+    .contact-line {
+      font-size: 11.5px;
+      color: #374151;
+      margin-bottom: 2px;
+    }
+
+    .contact-line a {
+      color: #4f46e5;
+      text-decoration: none;
+    }
+
+    .summary {
+      font-size: 12px;
+      color: #374151;
+      margin-top: 8px;
+      line-height: 1.6;
+      border-left: 3px solid #4f46e5;
+      padding-left: 10px;
+      margin-bottom: 4px;
+    }
+
+    /* ─── SECTION ─── */
+    .section {
+      margin-top: 14px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: #111827;
+      background: #f3f4f6;
+      padding: 3px 6px;
+      margin-bottom: 10px;
+      border-left: 4px solid #4f46e5;
+    }
+
+    /* ─── EXPERIENCE ─── */
+    .exp-item {
+      margin-bottom: 13px;
+    }
+
+    .exp-role {
+      font-size: 13px;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .exp-meta {
+      font-size: 11.5px;
+      color: #374151;
+      margin-top: 1px;
+      margin-bottom: 5px;
+    }
+
+    .exp-meta .company {
+      font-weight: 700;
+      color: #4f46e5;
+    }
+
+    .exp-meta .period {
+      color: #6b7280;
+    }
+
+    ul.bullets {
+      padding-left: 16px;
+    }
+
+    ul.bullets li {
+      font-size: 12px;
+      color: #1f2937;
+      margin-bottom: 3px;
+      line-height: 1.5;
+    }
+
+    /* ─── PROJECTS — single column list ─── */
+    .project-item {
+      margin-bottom: 10px;
+      padding-left: 10px;
+      border-left: 2px solid #e5e7eb;
+    }
+
+    .project-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .project-cat {
+      font-size: 11px;
+      font-weight: 600;
+      color: #4f46e5;
+      margin-bottom: 2px;
+    }
+
+    .project-desc {
+      font-size: 11.5px;
+      color: #374151;
+      margin: 2px 0;
+      line-height: 1.5;
+    }
+
+    .project-outcome {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #15803d;
+      margin: 2px 0 3px;
+    }
+
+    .project-tech {
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    .project-tech span {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    /* ─── SKILLS — single column, labeled rows ─── */
+    .skill-item {
+      font-size: 12px;
+      color: #1f2937;
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+
+    .skill-item .skill-label {
+      font-weight: 800;
+      color: #111827;
+      display: inline;
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-item {
+      margin-bottom: 8px;
+    }
+
+    .edu-degree {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .edu-meta {
+      font-size: 11.5px;
+      color: #374151;
+    }
+
+    .edu-meta .inst {
+      font-weight: 700;
+      color: #4f46e5;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 6px 0;
+    }
+
+    /* ─── PRINT ─── */
+    @media print {
+      .print-btn { display: none !important; }
+      .print-tip { display: none !important; }
+      body { font-size: 11.5px; }
+      .page { padding: 16px 22px; max-width: 100%; }
+      @page {
+        margin: 0.45in;
+        size: A4;
+        /* hides browser header/footer in supported browsers */
+        marks: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="print-tip">
+  <strong>PDF Save Karne Ka Sahi Tarika:</strong><br>
+  1. "Save as PDF" button click karo<br>
+  2. Print dialog mein <strong>"More settings"</strong> kholo<br>
+  3. <strong>"Headers and footers"</strong> ka checkbox <strong>UNCHECK</strong> karo<br>
+  4. Phir Save karo
+</div>
+<button class="print-btn" onclick="window.print()">Save as PDF</button>
+
+<div class="page">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="name">Yogesh Mahawar</div>
+  <div class="role-title">Full-Stack Developer and AI Engineer</div>
+  <div class="contact-line">Jaipur, Rajasthan, India | +91-8505072814 | <a href="mailto:myogesh729@gmail.com">myogesh729@gmail.com</a> | <a href="https://linkedin.com/in/yogesh-mahawar-831977272">linkedin.com/in/yogesh-mahawar-831977272</a> | <a href="https://github.com/yogeshmahawar">github.com/yogeshmahawar</a></div>
+
+  <div class="summary">
+    Full-Stack Developer and AI Engineer with 3+ years of experience building intelligent web applications using Laravel, React, Node.js, and AI/LLM integrations. Specialized in WhatsApp Business API automation, Shopify app development, and scalable system design. Open to freelance, AI integrations, and full-time opportunities.
+  </div>
+
+  <!-- ═══ WORK EXPERIENCE ═══ -->
+  <div class="section">
+    <div class="section-title">Work Experience</div>
+
+    <div class="exp-item">
+      <div class="exp-role">PHP Laravel Developer</div>
+      <div class="exp-meta">
+        <span class="company">99isolutions</span> | Jaipur, Rajasthan |
+        <span class="period">May 2024 – Present</span>
+      </div>
+      <ul class="bullets">
+        <li>Engineered an AI Agent for WhatsApp using LLM via Node.js and Laravel, enabling automated 24/7 intelligent customer support with natural language query routing.</li>
+        <li>Architected an AI Answer Node system for WhatsApp and website to resolve customer queries across multiple knowledge bases without human intervention.</li>
+        <li>Created a Shopify application integrating WhatsApp Business API for real-time order notifications using GraphQL and webhook event handling.</li>
+        <li>Designed an embeddable 99Pandit booking widget featuring WhatsApp OTP verification, location-based dropdowns, and seamless third-party lead capture.</li>
+        <li>Launched BizCard, a WhatsApp based digital visiting card system with QR code sharing built using React, Node.js, and MongoDB.</li>
+        <li>Delivered an Automated Reminder Application using Laravel Queues and Redis that reduced missed appointments by 85%.</li>
+        <li>Shipped a WordPress WooCommerce plugin for abandoned cart recovery that sends personalized messages via WhatsApp and email with automatically generated discount codes.</li>
+        <li>Optimized and scaled 4 live production websites including getgabs.com and 99pandit.com, ensuring 99.9% uptime and improved page performance.</li>
+        <li>Spearheaded integration of GoTab and other third-party platforms via REST API and GraphQL, streamlining data exchange across services.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-role">Junior Software Developer</div>
+      <div class="exp-meta">
+        <span class="company">SKYRED THAILAND</span> | Jaipur, Rajasthan |
+        <span class="period">May 2023 – May 2024</span>
+      </div>
+      <ul class="bullets">
+        <li>Built and deployed 5+ responsive websites and multimodule admin panels using HTML, PHP, and Laravel, reducing manual admin tasks by 30%.</li>
+        <li>Optimized MySQL database schema for 3 projects, improving query execution speed and supporting high-volume datasets.</li>
+        <li>Implemented secure CRUD operations with user roles and access control using Laravel Breeze, covering 100% of authentication requirements.</li>
+        <li>Accelerated UI delivery by building 10+ interactive frontend components using jQuery and AJAX in collaboration with design teams.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ TECHNICAL SKILLS ═══ -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+
+    <div class="skill-item"><span class="skill-label">Languages:</span> PHP, JavaScript, TypeScript, SQL</div>
+    <div class="skill-item"><span class="skill-label">Frameworks and Libraries:</span> Laravel, React, Next.js, Node.js, Inertia.js, Remix, CakePHP, jQuery</div>
+    <div class="skill-item"><span class="skill-label">AI and GenAI:</span> LLM Integration, Generative AI, AI Agent Development, Prompt Engineering, Chatbot Development, OpenAI API</div>
+    <div class="skill-item"><span class="skill-label">Messaging and Automation:</span> WhatsApp Business API, Webhook Handling, Message Templates, OTP Verification, Chatbot Automation</div>
+    <div class="skill-item"><span class="skill-label">CMS and E-commerce:</span> Shopify App Development, WordPress, WooCommerce, GraphQL, REST API</div>
+    <div class="skill-item"><span class="skill-label">Database and Cache:</span> MySQL, MongoDB, Redis, SQL, Eloquent ORM, Database Optimization</div>
+    <div class="skill-item"><span class="skill-label">Architecture:</span> System Design, Microservices, Laravel Queues, API Design, Scalable Architecture</div>
+    <div class="skill-item"><span class="skill-label">Frontend and Styling:</span> HTML5, CSS3, TailwindCSS, Bootstrap, AJAX, Responsive Design</div>
+    <div class="skill-item"><span class="skill-label">Tools and Platforms:</span> Git, GitHub, Postman, VS Code, Agile Development, API Integration</div>
+  </div>
+
+  <!-- ═══ PROJECTS ═══ -->
+  <div class="section">
+    <div class="section-title">Key Projects</div>
+
+    <div class="project-item">
+      <div class="project-cat">AI / WhatsApp Automation</div>
+      <div class="project-title">AI WhatsApp Agent</div>
+      <div class="project-desc">An LLM powered WhatsApp automation system providing 24/7 intelligent customer support with natural language query routing and zero manual intervention.</div>
+      <div class="project-outcome">Result: Full automation of customer support, zero manual intervention required</div>
+      <div class="project-tech">Tech Stack: <span>Node.js, Laravel, WhatsApp Cloud API, LLM, GenAI</span></div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-cat">Mobile / SaaS</div>
+      <div class="project-title">BizCard – WhatsApp Digital Visiting Card</div>
+      <div class="project-desc">A WhatsApp based digital visiting card platform that enables instant professional contact sharing via QR codes at networking events, removing the need for paper cards.</div>
+      <div class="project-outcome">Result: Eco-friendly alternative to paper cards with one-tap contact saving</div>
+      <div class="project-tech">Tech Stack: <span>React, Node.js, WhatsApp Business API, MongoDB, QR Code</span></div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-cat">Automation</div>
+      <div class="project-title">Automated Reminder Application</div>
+      <div class="project-desc">A scheduling system that sends personalized WhatsApp reminders on event dates via Laravel Queues and Redis, ensuring reliable background delivery with 100% uptime.</div>
+      <div class="project-outcome">Result: 85% reduction in missed appointments, 100% automated delivery</div>
+      <div class="project-tech">Tech Stack: <span>Laravel, Node.js, WhatsApp Business API, Redis, Laravel Queues</span></div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-cat">E-commerce / Shopify</div>
+      <div class="project-title">Shopify WhatsApp Integration App</div>
+      <div class="project-desc">Developed a custom Shopify application that integrates WhatsApp Business API to send real-time order notifications, including webhook handling, message templates, and GraphQL calls.</div>
+      <div class="project-outcome">Result: Real-time WhatsApp order tracking for customers</div>
+      <div class="project-tech">Tech Stack: <span>Laravel, Shopify API, WhatsApp Cloud API, GraphQL</span></div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-cat">AI / Web Automation</div>
+      <div class="project-title">AI Answer Node for Website</div>
+      <div class="project-desc">An embeddable AI assistant supporting multiple knowledge bases with context aware responses and automatic escalation to human agents, deployable on any website.</div>
+      <div class="project-outcome">Result: Reduced support tickets, multi-domain knowledge integration</div>
+      <div class="project-tech">Tech Stack: <span>Node.js, React, LLM, GenAI, REST API</span></div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-cat">WordPress / Plugin Development</div>
+      <div class="project-title">Abandoned Cart Recovery Plugin</div>
+      <div class="project-desc">A WooCommerce plugin that detects abandoned carts and sends automated recovery messages via WhatsApp or email, each containing a unique discount code to bring customers back.</div>
+      <div class="project-outcome">Result: Increased cart recovery rate through multichannel outreach</div>
+      <div class="project-tech">Tech Stack: <span>PHP, WordPress, WooCommerce, WhatsApp Business API</span></div>
+    </div>
+
+  </div>
+
+  <!-- ═══ EDUCATION ═══ -->
+  <div class="section">
+    <div class="section-title">Education and Certifications</div>
+
+    <div class="edu-item">
+      <div class="edu-degree">Agentic AI Certificate Program (In Progress)</div>
+      <div class="edu-meta"><span class="inst">Coursera and Coding Ninja</span> | December 2025 – June 2026 | Online</div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-degree">Bachelor of Computer Applications, Computer Science (In Progress)</div>
+      <div class="edu-meta"><span class="inst">University of Technology</span> | June 2023 – June 2026 (Expected) | Jaipur, Rajasthan</div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-degree">Full Stack Web Development Certification</div>
+      <div class="edu-meta"><span class="inst">Matrix Computers</span> | January 2022 – October 2022 | Jaipur, Rajasthan</div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-degree">Bachelor of Arts, Humanities</div>
+      <div class="edu-meta"><span class="inst">Kota University</span> | June 2018 – July 2021 | Kota, Rajasthan</div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+  <div style="font-size: 11px; color: #9ca3af; margin-top: 6px;">
+    Available for Freelance Projects | AI Integrations | Full-Stack Development | WhatsApp API Automation
+  </div>
+
+</div>
+</body>
+</html>

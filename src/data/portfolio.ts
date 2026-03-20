@@ -58,7 +58,7 @@ export const skills = [
     category: "Database & Tools",
     icon: "Database",
     color: "from-indigo-500 to-blue-600",
-    items: ["MySQL", "SQL", "Git", "GitHub", "Postman", "VS Code"],
+    items: ["MySQL", "MongoDB", "Redis", "SQL", "Git", "GitHub", "Postman", "VS Code"],
   },
 ];
 
@@ -154,6 +154,26 @@ export const projects = [
     icon: "LayoutDashboard",
     highlights: ["Role-based access", "Eloquent ORM", "Real-time data"],
   },
+  {
+    title: "BizCard – WhatsApp Visiting Card",
+    description:
+      "WhatsApp-based digital visiting card system for instant contact sharing at networking events. Users share complete contact details via QR codes — no manual entry needed.",
+    tech: ["React", "Node.js", "WhatsApp API", "QR Code", "MongoDB"],
+    color: "from-sky-500 to-blue-600",
+    icon: "CreditCard",
+    highlights: ["QR code sharing", "Instant contact save", "Eco-friendly"],
+    category: "Mobile / SaaS",
+  },
+  {
+    title: "Automated Reminder Application",
+    description:
+      "Automated scheduling system that sends personalized WhatsApp reminders on event dates using Laravel Queues and Redis. Reduced missed appointments by 85% with zero manual intervention.",
+    tech: ["Laravel", "Node.js", "WhatsApp API", "Redis", "Queues"],
+    color: "from-yellow-500 to-orange-500",
+    icon: "Bell",
+    highlights: ["100% automated delivery", "85% less missed appointments", "Redis queues"],
+    category: "Automation",
+  },
 ];
 
 export const education = [
@@ -188,4 +208,43 @@ export const stats = [
   { label: "Projects Delivered", value: "15+" },
   { label: "AI Integrations", value: "5+" },
   { label: "Happy Clients", value: "10+" },
+];
+
+export const testimonials = [
+  {
+    name: "Rahul Verma",
+    role: "Product Manager",
+    company: "99isolutions",
+    avatar: "RV",
+    color: "from-blue-500 to-cyan-500",
+    text: "Yogesh delivered an exceptional AI WhatsApp agent that completely transformed our customer support. His deep understanding of LLM integration and rapid delivery is truly impressive.",
+    rating: 5,
+  },
+  {
+    name: "Priya Agarwal",
+    role: "CEO",
+    company: "Digital Startup",
+    avatar: "PA",
+    color: "from-purple-500 to-pink-500",
+    text: "The Shopify WhatsApp integration Yogesh built increased our order notification rate by 85%. Excellent communication skills and top-notch technical expertise throughout the project.",
+    rating: 5,
+  },
+  {
+    name: "Amit Sharma",
+    role: "CTO",
+    company: "E-commerce Brand",
+    avatar: "AS",
+    color: "from-green-500 to-teal-500",
+    text: "Yogesh's WordPress abandoned cart plugin with WhatsApp recovery brought back 30% of our lost carts. Outstanding attention to detail and delivered ahead of schedule.",
+    rating: 5,
+  },
+  {
+    name: "Sunita Patel",
+    role: "Marketing Director",
+    company: "Agency Partner",
+    avatar: "SP",
+    color: "from-orange-500 to-amber-500",
+    text: "Working with Yogesh was a pleasure. He built our 99Pandit booking widget with OTP verification seamlessly. Professional, reliable and a highly skilled full-stack developer.",
+    rating: 5,
+  },
 ];

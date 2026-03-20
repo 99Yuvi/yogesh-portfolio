@@ -118,12 +118,11 @@ export default function AiChat() {
     }))
 
     try {
-      const apiKey = import.meta.env.VITE_GROQ_API_KEY
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      // API call goes through our Node.js backend proxy — key stays server-side
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
           model: 'llama-3.3-70b-versatile',

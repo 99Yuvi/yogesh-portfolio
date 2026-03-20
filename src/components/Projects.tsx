@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
 import {
   Bot, ShoppingCart, Calendar, ShoppingBag, Cpu,
-  LayoutDashboard, ArrowUpRight, Zap, type LucideIcon
+  LayoutDashboard, ArrowUpRight, Zap, CreditCard, Bell, type LucideIcon
 } from 'lucide-react'
 import { projects } from '../data/portfolio'
 
 const iconMap: Record<string, LucideIcon> = {
-  Bot, ShoppingCart, Calendar, ShoppingBag, Cpu, LayoutDashboard,
+  Bot, ShoppingCart, Calendar, ShoppingBag, Cpu, LayoutDashboard, CreditCard, Bell,
 }
 
 const fadeUp = {
