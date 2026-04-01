@@ -64,7 +64,7 @@ export const skills = [
 
 export const experiences = [
   {
-    role: "PHP Laravel Developer",
+    role: "Full-Stack Developer & AI Engineer",
     company: "99isolutions",
     location: "Jaipur, Rajasthan",
     period: "05/2024 – Present",
